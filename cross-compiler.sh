@@ -54,7 +54,6 @@ getNode()
 buildNodeJSArmV5()
 {
    export PATH="${PWD}/x-tools/arm-unknown-linux-gnueabi/bin:$PATH"
-#   echo $PATH
    export TOOL_PREFIX="arm-unknown-linux-gnueabi"
    export CC="${TOOL_PREFIX}-gcc"
    export CXX="${TOOL_PREFIX}-g++"
@@ -68,20 +67,15 @@ buildNodeJSArmV5()
    export VFP3=off
    export VFP2=off
    PREFIX_DIR="/usr/local"
-#   sudo chown -R vagrant: /home/vagrant/
-#   cd /home/vagrant/node
    version=$(readlink node | egrep -o '[0-9\.]+')
    majorminor=${version:0:${#version} - 3}
-#   echo $version
-#   echo $majorminor
    cd node
    ./configure --without-snapshot --dest-cpu=arm --dest-os=linux --prefix="${PREFIX_DIR}"
    make -j 2
-#   sudo chown -R vagrant: /home/vagrant/
    make install DESTDIR=/tmp/installARMv5
    fpm -s dir -t deb -n nodejs -v "$majorminor-1vr~squeeze1" --category web -m "Yuncong Zhang <njitzyc@gmail.com>" --url http://nodejs.org/ \
    --description "Node.js event-based server-side javascript engine Node.js is similar in design to and influenced by systems like Ruby's Event Machine or Python's Twisted. It takes the event model a bit further - it presents the event loop as a language construct instead of as a library. Node.js is bundled with several useful libraries to handle server tasks : System, Events, Standard I/O, Modules, Timers, Child Processes, POSIX, HTTP, Multipart Parsing, TCP, DNS, Assert, Path, URL, Query Strings." \
-   -C /tmp/installARMv5 -a armel  -p /tmp/nodejs_$version-1vr~squeeze1_armel.deb  usr/local/
+   -C /tmp/installARMv5 -a armel  -p /tmp/nodejs_$version-armv5~squeeze1_armel.deb  usr/local/
    make clean
 }
 
