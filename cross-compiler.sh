@@ -202,12 +202,23 @@ case "$1" in
 	    getXtoolsArmv6
 	    getXtoolsArmv7
             ;;
-
         build)
-#            setEnv
-            buildNodeJSArmV5
-            buildNodeJSArmV6
-            buildNodeJSArmV7
+            case "$2" in
+	    	5)
+	            buildNodeJSArmV5
+		    ;;
+		6)
+	            buildNodeJSArmV6
+		    ;;
+		7)
+	            buildNodeJSArmV7
+		    ;;
+		*)
+		    buildNodeJSArmV5
+		    buildNodeJSArmV6
+		    buildNodeJSArmV7
+		    ;;
+	    esac
             ;;
          
         clean)
