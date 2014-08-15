@@ -99,7 +99,7 @@ buildNodeJSArmV5()
    ./configure --without-snapshot --dest-cpu=arm --dest-os=linux --prefix="${PREFIX_DIR}"
    make -j 2
    make install DESTDIR=/tmp/installARMv5
-   fpm -s dir -t deb -n nodejs -v "$majorminor-armv5_armel" --category web -m "Yuncong Zhang <njitzyc@gmail.com>" --url http://nodejs.org/ \
+   fpm -s dir -t deb -n nodejs -v "$version" --category web -m "Yuncong Zhang <njitzyc@gmail.com>" --url http://nodejs.org/ \
    --description "Node.js event-based server-side javascript engine Node.js is similar in design to and influenced by systems like Ruby's Event Machine or Python's Twisted. It takes the event model a bit further - it presents the event loop as a language construct instead of as a library. Node.js is bundled with several useful libraries to handle server tasks : System, Events, Standard I/O, Modules, Timers, Child Processes, POSIX, HTTP, Multipart Parsing, TCP, DNS, Assert, Path, URL, Query Strings." \
    -C /tmp/installARMv5 -a armel  -p /tmp/nodejs_$version-armv5_armel.deb  usr/local/
    make clean
@@ -130,7 +130,7 @@ buildNodeJSArmV6()
    ./configure --without-snapshot --dest-cpu=arm --dest-os=linux --prefix="${PREFIX_DIR}"
    make -j 2
    make install DESTDIR=/tmp/installARMv6
-   fpm -s dir -t deb -n nodejs -v "$majorminor-armv6_armhf" --category web -m "Yuncong Zhang <njitzyc@gmail.com>" --url http://nodejs.org/ \
+   fpm -s dir -t deb -n nodejs -v "$version" --category web -m "Yuncong Zhang <njitzyc@gmail.com>" --url http://nodejs.org/ \
    --description "Node.js event-based server-side javascript engine Node.js is similar in design to and influenced by systems like Ruby's Event Machine or Python's Twisted. It takes the event model a bit further - it presents the event loop as a language construct instead of as a library. Node.js is bundled with several useful libraries to handle server tasks : System, Events, Standard I/O, Modules, Timers, Child Processes, POSIX, HTTP, Multipart Parsing, TCP, DNS, Assert, Path, URL, Query Strings." \
    -C /tmp/installARMv6 -a armhf  -p /tmp/nodejs_$version-armv6_armhf.deb  usr/local
    make clean
@@ -161,7 +161,7 @@ buildNodeJSArmV7()
    ./configure --without-snapshot --without-ssl --dest-cpu=arm --dest-os=linux --prefix="${PREFIX_DIR}"
    make -j 2
    make install DESTDIR=/tmp/installARMv7
-   fpm -s dir -t deb -n nodejs -v "$majorminor-armv7_armhf" --category web -m "Yuncong Zhang <njitzyc@gmail.com>" --url http://nodejs.org/ \
+   fpm -s dir -t deb -n nodejs -v "$version" --category web -m "Yuncong Zhang <njitzyc@gmail.com>" --url http://nodejs.org/ \
    --description "Node.js event-based server-side javascript engine Node.js is similar in design to and influenced by systems like Ruby's Event Machine or Python's Twisted. It takes the event model a bit further - it presents the event loop as a language construct instead of as a library. Node.js is bundled with several useful libraries to handle server tasks : System, Events, Standard I/O, Modules, Timers, Child Processes, POSIX, HTTP, Multipart Parsing, TCP, DNS, Assert, Path, URL, Query Strings." \
    -C /tmp/installARMv7 -a armhf  -p /tmp/nodejs_$version-armv7_armhf.deb  usr/local
    make clean
