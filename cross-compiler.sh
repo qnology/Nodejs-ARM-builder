@@ -8,7 +8,7 @@ updateBox()
     fi
 
     echo "-> Installing apt-get packages"
-    
+
     aptitude update
     aptitude -y install build-essential vagrant
     aptitude -y install ruby1.9.1-full
@@ -19,7 +19,7 @@ updateBox()
 
 getXtoolsArmv5()
 {
-    if [ ! -d x-tools ]; then 
+    if [ ! -d x-tools ]; then
         echo "-> Installing Cross Compiler ARMv5"
         echo "-> Downloading Cross Compiler ARMv5"
         wget -q http://archlinuxarm.org/builder/xtools/x-tools.tar.xz;
@@ -32,7 +32,7 @@ getXtoolsArmv5()
 
 getXtoolsArmv6()
 {
-   if [ ! -d x-tools6h ]; then 
+   if [ ! -d x-tools6h ]; then
          echo "-> Installing Cross Compiler ARMv6"
          echo "-> Downloading Cross Compiler ARMv6"
          wget -q http://archlinuxarm.org/builder/xtools/x-tools6h.tar.xz;
@@ -46,7 +46,7 @@ getXtoolsArmv6()
 getXtoolsArmv7()
 {
    pwd
-   if [ ! -d x-tools7h ]; then 
+   if [ ! -d x-tools7h ]; then
          echo "-> Installing Cross Compiler ARMv7"
          echo "-> Downloading Cross Compiler ARMv7"
          wget -q http://archlinuxarm.org/builder/xtools/x-tools7h.tar.xz;
@@ -151,7 +151,7 @@ buildNodeJSArmV7()
    export CCFLAGS="-march=armv7-a -mtune=cortex-a8 -mfpu=vfp -mfloat-abi=hard -DUSE_EABI_HARDFLOAT"
    export CXXFLAGS="-march=armv7-a -mtune=cortex-a8 -mfpu=vfp -mfloat-abi=hard -DUSE_EABI_HARDFLOAT"
    export OPENSSL_armcap=7
-   export GYPFLAGS="-Darmeabi=hard -Dv8_use_arm_eabi_hardfloat=true -Dv8_can_use_vfp3_instructions=true -Dv8_can_use_vfp2_instructions=true -Darm7=1"  
+   export GYPFLAGS="-Darmeabi=hard -Dv8_use_arm_eabi_hardfloat=true -Dv8_can_use_vfp3_instructions=true -Dv8_can_use_vfp2_instructions=true -Darm7=1"
    export VFP3=on
    export VFP2=on
    PREFIX_DIR="/usr/local"
@@ -192,43 +192,56 @@ case "$1" in
         updateBox)
             updateBox
             ;;
-         
+
         getNode)
             getNode
             ;;
 
         getXtools)
-            getXtoolsArmv5
-	    getXtoolsArmv6
-	    getXtoolsArmv7
+            case "$2" in
+                5)
+                    getXtoolsArmv5
+                    ;;
+                6)
+                    getXtoolsArmv6
+                    ;;
+                7)
+                    getXtoolsArmv7
+                    ;;
+                *)
+                    getXtoolsArmv5
+                    getXtoolsArmv6
+                    getXtoolsArmv7
+                    ;;
+            esac
             ;;
         build)
             case "$2" in
-	    	5)
-	            buildNodeJSArmV5
-		    ;;
-		6)
-	            buildNodeJSArmV6
-		    ;;
-		7)
-	            buildNodeJSArmV7
-		    ;;
-		*)
-		    buildNodeJSArmV5
-		    buildNodeJSArmV6
-		    buildNodeJSArmV7
-		    ;;
-	    esac
+                5)
+                    buildNodeJSArmV5
+                    ;;
+                6)
+                    buildNodeJSArmV6
+                    ;;
+                7)
+                    buildNodeJSArmV7
+                    ;;
+                *)
+                    buildNodeJSArmV5
+                    buildNodeJSArmV6
+                    buildNodeJSArmV7
+                    ;;
+            esac
             ;;
-         
+
         clean)
             clean
             ;;
-         
+
         *)
             echo $"Usage: $0 {updateBox|getXtools|getNode|build}"
             exit 1
- 
+
 esac
 
 PATH="$OLDPATH"
